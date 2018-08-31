@@ -4,4 +4,5 @@
 
 `java -jar target/benchmarks.jar -l` to list available benchmarks
 
-`java -jar target/benchmarks.jar -f 1 pl.s13k.hashing.E2ETest.ingest` to run ingest benchmark
+Run ingest benchmark with 4 warmup iteratios and 1 fork.
+`java -jar target/benchmarks.jar -f 1 -wu 4 pl.s13k.hashing.E2ETest.ingest`
