@@ -13,7 +13,7 @@ class E2ETest {
   var metricsStream: Array[Metric] = _
   var i: Int = _
 
-  val datapoints = cardinality * 10
+  val datapoints = cardinality * 100
 
   val alerts = Alerts()
 
@@ -46,7 +46,7 @@ class E2ETest {
 object E2ETest {
   type MetricGenerator = () => Metric
 
-  val cardinality = 10
+  val cardinality = 50
 
   val gen = new MetricGenerator {
     override def apply(): Metric = {
