@@ -66,6 +66,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
             <artifactId>RoaringBitmap</artifactId>
             <version>0.7.16</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.8</version>
+        </dependency>
     </dependencies>
 
     <prerequisites>
