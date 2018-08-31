@@ -11,24 +11,32 @@ class E2ETest {
   import E2ETest._
 
   var metricsStream: Array[Metric] = _
+  var i: Int = _
 
   val datapoints = cardinality * 10
 
   val alerts = Alerts()
 
   @Setup
-  def prepareMetrics: Unit = metricsStream = Stream.continually(gen()).take(datapoints).toArray
+  def prepareMetrics: Unit = {
+    metricsStream = Stream.continually(gen()).take(datapoints).toArray
+    i = 0
+  }
+
+  def nextMetric(): Metric = {
+    i += 1
+    metricsStream(i % metricsStream.length)
+  }
 
   @Benchmark
   @BenchmarkMode(Array(Mode.Throughput))
-  def ingest(): Seq[(Metric, Alert)] = {
-    val matching = mutable.Buffer[(Metric, Alert)]()
+  def ingest(): Seq[Alert] = {
+    val m = nextMetric()
+    val matching = mutable.Buffer[Alert]()
 
-    for {m <- metricsStream} {
-      for (a <- alerts) {
-        if (a.matches(m)) {
-          matching.append((m, a))
-        }
+    for (a <- alerts) {
+      if (a.matches(m)) {
+        matching.append(a)
       }
     }
     matching
