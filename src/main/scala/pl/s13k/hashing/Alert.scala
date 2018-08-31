@@ -4,14 +4,13 @@ import scala.util.Random
 
 case class Alert(hash: Int) {
   def matches(m: Metric): Boolean = {
-    Thread.sleep(50)
-    math.abs(m.dims.hashCode()) % Alerts.hashingPool == hash
+    math.sqrt(math.abs(m.dims.hashCode())).toInt % Alerts.hashingPool == hash
   }
 }
 
 object Alerts {
-  val hashingPool = 5000
-  val size = 100
+  val hashingPool = 500
+  val size = 50
 
   val random = new Random
 

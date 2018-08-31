@@ -12,12 +12,12 @@ class E2ETest {
 
   var metricsStream: Array[Metric] = _
 
-  val limit = cardinality * 10
+  val datapoints = cardinality * 10
 
   val alerts = Alerts()
 
   @Setup
-  def prepareMetrics: Unit = metricsStream = Stream.continually(gen()).take(limit).toArray
+  def prepareMetrics: Unit = metricsStream = Stream.continually(gen()).take(datapoints).toArray
 
   @Benchmark
   @BenchmarkMode(Array(Mode.Throughput))
@@ -38,7 +38,7 @@ class E2ETest {
 object E2ETest {
   type MetricGenerator = () => Metric
 
-  val cardinality = 50
+  val cardinality = 10
 
   val gen = new MetricGenerator {
     override def apply(): Metric = {
