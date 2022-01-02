@@ -39,7 +39,7 @@ class E2ETest {
         matching.append(a)
       }
     }
-    matching
+    matching.toSeq
   }
 }
 
